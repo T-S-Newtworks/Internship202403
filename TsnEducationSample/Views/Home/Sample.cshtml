@@ -50,7 +50,7 @@
         </form>
     </div>
     <div class="row">
-        <h3>② JSON形式のオープンデータを活用した検索</h3>
+        <h3>② JSON形式のオープンデータを活用した書籍検索</h3>
         <form>
             <div class=" d-flex flex-row gap-2 mb-2">
                 <div class="form-group">
@@ -62,8 +62,9 @@
                     <input type="text" class="form-control" id="bookAuthor">
                 </div>
             </div>
-            <button type="button" class="btn btn-primary mb-3" id="isbnSearch">書籍検索</button>
+            <button type="button" class="btn btn-primary mb-3" id="bookSearch">書籍検索</button>
         </form>
+        <h4>書籍検索結果(最大10件表示)</h4>
         <div>
             <table class="table table-bordered" id="bookSearchTable">
                 <thead>
@@ -88,7 +89,7 @@
     </div>
     <div class="row">
         <h3>④ サーバ側の処理(TODOリスト)</h3>
-        @Html.ActionLink("TODOリストへ", "TodoList", "Home", new { area = "" }, new { @class = "action-link" })
+        @Html.ActionLink("TODOリストへ", "Index", "Todo", new { area = "" }, new { @class = "action-link" })
     </div>
 </main>
 @section scripts{
@@ -96,7 +97,7 @@
 
         //#region 書籍検索
         //送信ボタンがクリックされたときの処理
-        $('#isbnSearch').click(function (e) {
+        $('#bookSearch').click(function (e) {
             e.preventDefault();
 
             // 入力された情報を取得
@@ -155,7 +156,7 @@
                             //#列
                             var numberCell = document.createElement('span');
                             numberCell.className = "bookSearchContents";
-                            numberCell.innerHTML = i;
+                            numberCell.innerHTML = i+ 1;
                             numberCellElem.appendChild(numberCell);
                             //タイトル列
                             var titleCell = document.createElement('span');
@@ -164,6 +165,10 @@
                             titleCellElem.appendChild(titleCell);
                             //著者列
                             var authorCell = titleCell.cloneNode(false);
+                            //authorsがない場合は著者列は設定しない
+                            if (!('authors' in data.items[i].volumeInfo)) {
+                                continue;
+                            }
                             for (let j = 0; j < data.items[i].volumeInfo.authors.length; j++) {
                                 authorCell.innerHTML += data.items[i].volumeInfo.authors[j];
                                 authorCellElem.appendChild(authorCell);

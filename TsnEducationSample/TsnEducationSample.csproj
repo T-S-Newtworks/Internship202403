@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashBoardController .cs" />
+    <Compile Include="Controllers\TodoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -153,7 +154,6 @@
     <Content Include="Content\images\IIS.png" />
     <Content Include="Content\images\JQuery.png" />
     <Content Include="Content\images\visualstudio.png" />
-    <Content Include="Content\Page\DashBoard.css" />
     <Content Include="Content\Page\Index.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -191,7 +191,7 @@
     <Content Include="Views\Home\Sample.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\DashBoard\Index.cshtml" />
-    <Content Include="Views\Home\TodoList.cshtml" />
+    <Content Include="Views\Todo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

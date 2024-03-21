@@ -121,8 +121,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashBoardController .cs" />
+    <Compile Include="Controllers\ItakuraController.cs" />
+    <Compile Include="Controllers\KikuchiController.cs" />
+    <Compile Include="Controllers\ObaraController.cs" />
+    <Compile Include="Controllers\MinakawaController.cs" />
     <Compile Include="Controllers\TodoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\YamadaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,9 +197,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Views\Todo\Index.cshtml" />
+    <Content Include="Views\Itakura\Index.cshtml" />
+    <Content Include="Views\Kikuchi\Index.cshtml" />
+    <Content Include="Views\Obara\Index.cshtml" />
+    <Content Include="Views\Yamada\Index.cshtml" />
+    <Content Include="Views\Minakawa\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
     <Folder Include="Scripts\Page\" />
   </ItemGroup>
   <ItemGroup>
@@ -242,7 +253,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>65461</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44369/</IISUrl>
+          <IISUrl>http://localhost:44369/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

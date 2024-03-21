@@ -4,52 +4,6 @@
 <main aria-labelledby="title">
     <h2 id="title">@ViewBag.Title</h2>
     <div class="row">
-        <h3>① 電卓</h3>
-        <form name="dentaku">
-            <table class="calcTable">
-                <!-- 液晶画面部分 -->
-                <tr>
-                    <td colspan="4">
-                        <input type="text" class="display" name="display" value="" disabled>
-                    </td>
-                </tr>
-
-                <!-- 上から1段目（7~9＋÷） -->
-                <tr>
-                    <td><input type="button" class="calcBtn" value="7" onclick="get_calc(this)"></td>
-                    <td><input type="button" class="calcBtn" value="8" onclick="get_calc(this)"></td>
-                    <td><input type="button" class="calcBtn" value="9" onclick="get_calc(this)"></td>
-                    <td><input type="button" value="÷" class="calcBtn operator" name="div_btn" onclick="get_calc(this)"></td>
-                </tr>
-
-                <!-- 上から2段目（4~6＋×） -->
-                <tr>
-                    <td><input type="button" class="calcBtn" value="4" onclick="get_calc(this)"></td>
-                    <td><input type="button" class="calcBtn" value="5" onclick="get_calc(this)"></td>
-                    <td><input type="button" class="calcBtn" value="6" onclick="get_calc(this)"></td>
-                    <td><input type="button" value="×" class="calcBtn operator" name="multi_btn" onclick="get_calc(this)"></td>
-                </tr>
-
-                <!-- 上から3段目（1~3＋-） -->
-                <tr>
-                    <td><input type="button" class="calcBtn" value="1" onclick="get_calc(this)"></td>
-                    <td><input type="button" class="calcBtn" value="2" onclick="get_calc(this)"></td>
-                    <td><input type="button" class="calcBtn" value="3" onclick="get_calc(this)"></td>
-                    <td><input type="button" value="-" class="calcBtn operator" onclick="get_calc(this)"></td>
-                </tr>
-
-                <!-- 上から4段目（0/C/=/+) -->
-                <tr>
-                    <td><input type="button" class="calcBtn" value="0" onclick="get_calc(this)"></td>
-                    <td><input type="button" class="calcBtn" value="C" onclick="get_calc(this)"></td>
-                    <td><input type="button" value="=" class="calcBtn equal" onclick="get_calc(this)"></td>
-                    <td><input type="button" value="+" class="calcBtn operator" onclick="get_calc(this)"></td>
-                </tr>
-
-            </table>
-        </form>
-    </div>
-    <div class="row">
         <h3>② JSON形式のオープンデータを活用した書籍検索</h3>
         <form>
             <div class=" d-flex flex-row gap-2 mb-2">
@@ -60,37 +14,46 @@
                 <div class="form-group">
                     @Html.Label("", "著者名", new { @for = "bookAuthor" })
                     <input type="text" class="form-control" id="bookAuthor">
+
                 </div>
             </div>
             <button type="button" class="btn btn-primary mb-3" id="bookSearch">書籍検索</button>
+            
         </form>
-        <h4>書籍検索結果(最大10件表示)</h4>
-        <div>
-            <table class="table table-bordered" id="bookSearchTable">
-                <thead>
-                    <tr>
-                        <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#</font></font></th>
-                        <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">タイトル</font></font></th>
-                        <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">著者</font></font></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="3" id="defaultFirstRow" style="text-align: center;">検索結果はありません。</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div style="display:flex; flex-direction:row; justify-content:space-between;">
+            <h4>書籍検索結果(最大10件表示)</h4>
+            <div class="form-group">
+                @Html.Label("", "並び替え", new { @for = "bookAuthor" })
+                <select name="soat" class="form-control">
+                    <option value="1"></option>
+                    <option value="2">ページ数順</option>
+                    <option value="3">出版日順</option>
+                </select>
+            </div>
         </div>
 
-    </div>
-    <div class="row">
-        <h3>③ いい感じのグラフを表示する(ダッシュボード)</h3>
-        @Html.ActionLink("ダッシュボードへ", "Index", "DashBoard", new { area = "" }, new { @class = "action-link" })
-    </div>
-    <div class="row">
-        <h3>④ サーバ側の処理(TODOリスト)</h3>
-        @Html.ActionLink("TODOリストへ", "Index", "Todo", new { area = "" }, new { @class = "action-link" })
-    </div>
+            <div>
+
+                <table class="table table-bordered" id="bookSearchTable">
+                    <thead>
+                        <tr>
+                            <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#</font></font></th>
+                            <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">タイトル</font></font></th>
+                            <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">著者</font></font></th>
+                            <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">isbn</font></font></th>
+                            <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ページ数</font></font></th>
+                            <th scope="col"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">出版日</font></font></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6" id="defaultFirstRow" style="text-align: center;">検索結果はありません。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
 </main>
 @section scripts{
     <script type="text/javascript">
@@ -135,7 +98,7 @@
             // WebAPI実行
             $.ajax({
                 url: url,
-                //url: 'https://api.openbd.jp/v1/get?isbn=978-4-7741-9690-9',
+                //url: 'https://www.googleapis.com/books/v1/volumes?q=intitle:Amazon',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
@@ -153,6 +116,9 @@
                             var numberCellElem = trElem.insertCell(0);
                             var titleCellElem = trElem.insertCell(1);
                             var authorCellElem = trElem.insertCell(2);
+                            var isbnCellElem = trElem.insertCell(3);
+                            var pageCountCellElem = trElem.insertCell(4);
+                            var publishedDateCellElem = trElem.insertCell(5);
                             //#列
                             var numberCell = document.createElement('span');
                             numberCell.className = "bookSearchContents";
@@ -165,6 +131,22 @@
                             titleCellElem.appendChild(titleCell);
                             //著者列
                             var authorCell = titleCell.cloneNode(false);
+                            //isbn列
+                            var isbnCell = document.createElement('span');
+                            isbnCell.className = "bookSearchContents";
+                            isbnCell.innerHTML = data.items[i].volumeInfo.industryIdentifiers[0].identifier;
+                            isbnCellElem.appendChild(isbnCell);
+                            //ページ数列
+                            var pageCountCell = document.createElement('span');
+                            pageCountCell.className = "bookSearchContents";
+                            pageCountCell.innerHTML = data.items[i].volumeInfo.pageCount;
+                            pageCountCellElem.appendChild(pageCountCell);
+                            //出版日列
+                            var publishedDateCell = document.createElement('span');
+                            publishedDateCell.className = "bookSearchContents";
+                            publishedDateCell.innerHTML = data.items[i].volumeInfo.publishedDate;
+                            publishedDateCellElem.appendChild(publishedDateCell);
+
                             //authorsがない場合は著者列は設定しない
                             if (!('authors' in data.items[i].volumeInfo)) {
                                 continue;
@@ -182,6 +164,7 @@
                         //検索結果ない場合はデフォルト行表示
                         defaultFirstRow.show();
                     }
+
                 },
                 error: function (data) {
                     alert("書籍検索中にエラーが発生しました。");
